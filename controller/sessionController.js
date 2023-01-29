@@ -28,7 +28,49 @@ module.exports.login = function (req, res) {
         }
     });
 
-}
+}//
+//addUser
+module.exports.addUser = function (req, res) {
+
+    let userType = req.body.userType
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
+    let email = req.body.email;
+    let phoneNum= req.body.phoneNum;
+    let password = req.body.password;
+    let confirmPassword=req.body.confirmPassword;
+
+    let user = new UserModel(
+        { 
+            // "userID": userID, 
+            "userType":userType,
+            "firstName": firstName,
+            "lastName":lastName,
+            "email":email,
+            "phoneNum":phoneNum,
+            "password":password,
+            "confirmPassword":confirmPassword
+        }
+    )
+
+    user.save(function (err, data) {
+        if (err) {
+            console.log(err);
+            res.json({
+                msg: "User not added",
+                status: -1,
+                data: "Something went wrong!!"
+            })
+        } else {
+            res.json({
+                msg: "User added",
+                status: 200,
+                data: data
+            })
+        }
+    })
+}//addUser
+//adduserends
 module.exports.signup = function (req, res) {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
@@ -69,7 +111,7 @@ module.exports.signup = function (req, res) {
 
 
 module.exports.getAllUsers = function (req, res) {
-    UserModel.find().exec(function (err, data) {
+    UserModel.find().populate("userType").exec(function (err, data) {
         if (err) {
             res.json({
                 status: -1,

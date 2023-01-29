@@ -27,6 +27,9 @@ app.post("/register",sessionController.signup)
 app.get("/getallusers",sessionController.getAllUsers)
 app.post("/login",sessionController.login)
 
+//users
+app.post("/user",sessionController.addUser)
+
 //usertype--api
 app.get('/userType',userTypeController.getAllUserTypes)
 app.post('/userType',userTypeController.addUserType)

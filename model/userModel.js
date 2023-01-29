@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new mongoose.Schema({
+    userType:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Usertype"
+    },
     firstName: {
       type: String,
     },
@@ -21,10 +25,6 @@ const UserSchema = new mongoose.Schema({
     confirmPassword:{
         type:String
     }
-    // ,role:{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:"Role"
-    // }
 });
  
 
