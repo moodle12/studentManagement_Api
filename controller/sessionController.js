@@ -127,3 +127,23 @@ module.exports.getAllUsers = function (req, res) {
         }
     })
 }
+
+module.exports.getuserByid = function(req,res){
+    let userid = req.params.userid;
+    UserModel.findOne({_id:userid},function (err,data) {
+        if (err) {
+            res.json({
+                status: -1,
+                msg: "SME",
+                data: err
+            })
+        } else {
+            res.json({
+                status: 200,
+                msg: "user reterieved..",
+                data: data
+            })
+        }
+    })
+
+}

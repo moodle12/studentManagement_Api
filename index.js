@@ -5,6 +5,7 @@ const admissionController = require("./controller/admissionController");
 const userTypeController = require("./controller/userTypeController");
 const resultController = require("./controller/resultController");
 const marksController = require("./controller/marksController");
+const imageController=require("./controller/imageController")
 const app = express()
 const cors = require("cors")
 app.use(express.json())  //body
@@ -29,6 +30,7 @@ app.post("/login",sessionController.login)
 
 //users
 app.post("/user",sessionController.addUser)
+app.get("/getuserbyid/:userid",sessionController.getuserByid)
 
 //usertype--api
 app.get('/userType',userTypeController.getAllUserTypes)
@@ -50,6 +52,9 @@ app.post('/result',resultController.addResult);
 app.get('/marks',marksController.getAllMarks);
 app.post('/marks',marksController.addMarks);
 
+//image--api
+app.post('/upload',imageController.addImage)
+app.get('/upload',imageController.getImage)
 
 app.listen(9109,function(err){
     if(err){
