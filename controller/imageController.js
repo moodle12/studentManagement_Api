@@ -22,7 +22,7 @@ module.exports.addImage=function(req,res){
         }
         else{
             const newImage= new imageModel({
-                name:req.body.name,
+                imgname:req.body.imgname,
                 image:{
                     data:fs.readFileSync("uploads/" + req.file.filename),
                     contentType:"image/png",
