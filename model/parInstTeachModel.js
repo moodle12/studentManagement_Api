@@ -2,21 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 
-const UserSchema = new mongoose.Schema({
+const parInstTeachSchema = new mongoose.Schema({
     userType:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Usertype"
     },
-    InstituteName:{
-        type:String
-    },
-    aadharCard:{
-        type:String
-    },
-    firstName: {
-      type: String
-    },
-    lastName:{
+    name:{
         type:String
     },
     email:{
@@ -32,7 +23,7 @@ const UserSchema = new mongoose.Schema({
         type:String
     }
 });
-UserSchema.pre("save", async function (next) {
+parInstTeachSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
       next();
     }
@@ -41,8 +32,8 @@ UserSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
   });
   
-  UserSchema.methods.matchPassword = async function (enteredPassword) {
+  parInstTeachSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
   };
 
-module.exports = mongoose.model("User",UserSchema)
+module.exports = mongoose.model("parInstTeach",parInstTeachSchema)

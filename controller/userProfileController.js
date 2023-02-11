@@ -83,14 +83,14 @@ let User = require('../model/userProfileModel');
 router.post('/user-profile', upload.single('profileImg'), (req, res, next) => {
     const url = req.protocol + '://' + req.get('host')
     const user = new User({
-        // user: req.body.user,
+        user: req.body.user,
         profileImg: url + '/public/' + req.file.filename
     });
     user.save().then(result => {
         res.status(201).json({
             message: "User registered successfully!",
             userCreated: {
-                // user: result.user,
+                user: result.user,
                 profileImg: result.profileImg
             }
         })
@@ -103,7 +103,7 @@ router.post('/user-profile', upload.single('profileImg'), (req, res, next) => {
 })
 
 router.get("/", (req, res, next) => {
-    User.find().then(data => {
+    User.find().populate("user").then(data => {
         res.status(200).json({
             message: "User list retrieved successfully!",
             users: data

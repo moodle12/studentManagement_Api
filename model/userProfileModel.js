@@ -1,10 +1,10 @@
 const mongoose = require("mongoose")
 
 const UserProfileSchema= new mongoose.Schema({
-    // user:{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:"User"
-    // },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
     profileImg:{
         type:String
     }
