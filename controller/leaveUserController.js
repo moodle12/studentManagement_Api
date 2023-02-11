@@ -8,6 +8,7 @@ module.exports.addleaveUser= function (req, res) {
     let mobileNo = req.body.mobileNo
     let currentInstitute=req.body.currentInstitute
     let reasonLeaving=req.body.reasonLeaving
+    let user=req.body.user
 
     let leave = new leaveUserModel(
         { 
@@ -17,7 +18,8 @@ module.exports.addleaveUser= function (req, res) {
             "email":email,
             "mobileNo":mobileNo,
             "currentInstitute":currentInstitute,
-            "reasonLeaving":reasonLeaving
+            "reasonLeaving":reasonLeaving,
+            "user":user
         }
     )
 
@@ -41,7 +43,7 @@ module.exports.addleaveUser= function (req, res) {
 
 //getAllAdmissions
 module.exports.getAllLeaves = function(req,res){
-    leaveUserModel.find().exec(function(err,data){
+    leaveUserModel.find().populate("user").exec(function(err,data){
         console.log(err);
         if(err){
             res.json({

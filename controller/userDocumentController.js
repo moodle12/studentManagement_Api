@@ -26,18 +26,18 @@ var upload = multer({
     }
 });
 let User = require('../model/userDocumentModel');
-router.post('/user-document', upload.single('License'), (req, res, next) => {
+router.post('/user-document', upload.single('Lc'), (req, res, next) => {
     const url = req.protocol + '://' + req.get('host')
     const user = new User({
         user: req.body.user,
-        License: url + '/public/' + req.file.filename
+        Lc: url + '/public/' + req.file.filename
     });
     user.save().then(result => {
         res.status(201).json({
             message: "Document registered successfully!",
             userCreated: {
                 user: result.user,
-                License: result.License
+                Lc: result.Lc
             }
         })
     }).catch(err => {

@@ -65,8 +65,8 @@ app.get('/marks',marksController.getAllMarks);
 app.post('/marks',marksController.addMarks);
 
 //image--api
-app.post('/upload',imageController.addImage)
-app.get('/upload',imageController.getImage)
+// app.post('/upload',imageController.addImage)
+// app.get('/upload',imageController.getImage)
 //parents||teacher||institution --api
 app.post('/registerAll',parInstTeachController.registerParInstTeach)
 app.get('/getAll',parInstTeachController.getAllParInstTeach)
@@ -82,6 +82,7 @@ app.get('/getAll',parInstTeachController.getAllParInstTeach)
 app.use('/public', express.static('public'));
 app.use('/api', api)
 app.use('/document',userDocumentController)
+app.use('/i',imageController)
 app.use((req, res, next) => {
     // Error goes via `next()` method
     setImmediate(() => {
